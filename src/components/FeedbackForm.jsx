@@ -33,7 +33,10 @@ function FeedbackForm() {
     if (value.trim().length > 10) {
       setIsDisabled(false);
       setMessage("");
-    } else setMessage("Feedback must be atleast 10 characters long.");
+    } else {
+      setMessage("Feedback must be atleast 10 characters long.");
+      setIsDisabled(true);
+    }
   };
 
   const handleSend = function (e) {
