@@ -1,22 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "./shared/Card";
 import { useState } from "react";
 import RatingSelect from "./RatingSelect";
 import feedbackContext from "../context/FeedbackContext";
 
 function FeedbackForm() {
-  const { handleAdd } = useContext(feedbackContext);
+  const { handleAdd, itemEdit } = useContext(feedbackContext);
 
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10);
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState("");
-  // const [selected, setSelected] = useState(10);
+  const [buttton, setButton] = useState("Send");
+
+  useEffect(() => {
+    setText(itemEdit ? itemEdit.text : "");
+    setRating(itemEdit ? itemEdit.rating : 10);
+    itemEdit ? setButton("Update") : setButton("Send");
+    // setIsDisabled(false);
+    setMessage("");
+  }, [itemEdit]);
 
   const handleChange = function ({ target: { value } }) {
+    // console.log(value);
     setText(value);
     if (!value) {
       setMessage("");
+      setIsDisabled(true);
       return;
     }
 
@@ -50,12 +60,12 @@ function FeedbackForm() {
             value={text}
           />
           <button
+            className="btn btn-primary"
             type="submit"
             onClick={handleSend}
-            style={{ backgroundColor: "cyan" }}
             disabled={isDisabled}
           >
-            Send
+            {buttton}
           </button>
         </div>
       </form>

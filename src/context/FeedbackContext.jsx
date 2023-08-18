@@ -14,6 +14,8 @@ export function FeedbackProvider({ children }) {
     ...FeedbackData,
   ]);
 
+  const [itemEdit, setItemEdit] = useState(null);
+
   const handleDelete = function (itemId) {
     setFeedback((feedback) => {
       return feedback.filter((item) => item.id !== itemId);
@@ -21,6 +23,22 @@ export function FeedbackProvider({ children }) {
   };
 
   const handleAdd = function (text, rating) {
+    if (itemEdit) {
+      setFeedback((prevfeedback) => {
+        prevfeedback.map((item) => {
+          if (item.id === itemEdit.id) {
+            console.log("Item id matched");
+            item.rating = Number(rating);
+            item.text = text;
+          }
+          return item;
+        });
+        return prevfeedback;
+      });
+      setItemEdit(null);
+      return;
+    }
+
     setFeedback((prev) => [
       ...prev,
       {
@@ -35,9 +53,11 @@ export function FeedbackProvider({ children }) {
     <feedbackContext.Provider
       value={{
         feedback,
+        itemEdit,
+        setItemEdit,
         setFeedback,
         handleDelete,
-        handleAdd
+        handleAdd,
       }}
     >
       {children}

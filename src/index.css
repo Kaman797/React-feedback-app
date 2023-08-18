@@ -30,7 +30,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  background-color: #1b1c39;
+  padding: 0 px;
+  margin: 0 px;
+  border-radius: 10px;
 }
 
 .card {
@@ -238,6 +241,12 @@ input:focus {
 
 .btn:disabled {
   filter: brightness(50%);
+}
+
+.feedback-edit
+{
+  filter: brightness(70%);
+  /* background-color: #d2d3ec; */
 }
 
 
