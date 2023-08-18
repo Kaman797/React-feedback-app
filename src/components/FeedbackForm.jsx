@@ -17,14 +17,14 @@ function FeedbackForm() {
     setText(itemEdit ? itemEdit.text : "");
     setRating(itemEdit ? itemEdit.rating : 10);
     itemEdit ? setButton("Update") : setButton("Send");
-    // setIsDisabled(false);
+    itemEdit && setIsDisabled(false);
     setMessage("");
   }, [itemEdit]);
 
   const handleChange = function ({ target: { value } }) {
     // console.log(value);
     setText(value);
-    if (!value) {
+    if (!value || value === "") {
       setMessage("");
       setIsDisabled(true);
       return;
