@@ -3,7 +3,7 @@ import { useState } from "react";
 import feedbackContext from "../context/FeedbackContext";
 // import Rating from "./Rating";
 
-function RatingSelect({ setRating }) {
+function RatingSelect({ rating, setRating }) {
   const [selected, setSelected] = useState(10);
   let ratings = Array.from({ length: 10 }, (_, index) => index);
 
@@ -16,6 +16,10 @@ function RatingSelect({ setRating }) {
   useEffect(() => {
     itemEdit ? setSelected(Number(itemEdit.rating)) : setSelected(10);
   }, [itemEdit]);
+
+  useEffect(() => {
+    setSelected(rating);
+  }, [rating]);
 
   const handleChange = function ({ currentTarget: { value } }) {
     setSelected(+value);
