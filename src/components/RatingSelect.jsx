@@ -23,7 +23,7 @@ function RatingSelect({ rating, setRating }) {
 
   const handleChange = function ({ currentTarget: { value } }) {
     setSelected(+value);
-    setRating(value);
+    setRating(+value);
   };
 
   return (
